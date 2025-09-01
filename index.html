@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>pinkverse://navya</title>
+
+    <!-- Tailwind via CDN + custom theme -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dustyRose: "#d4a5b5",
+                        mauve: "#8a5079",
+                        lavender: "#a18cda",
+                        ivory: "#fffaf3",
+                        roseGold: "#d4af37",
+                        softBlack: "#0e0e0e",
+                        neonPink: "#ff00c8"
+                    },
+                    fontFamily: {
+                        heading: ["'Playfair Display'", "serif"],
+                        body: ["Raleway", "sans-serif"],
+                        mono: ["'Source Code Pro'", "monospace"]
+                    },
+                    boxShadow: {
+                        rose: "0 6px 30px rgba(212,165,181,0.2)",
+                        neon: "0 0 30px rgba(255,0,200,0.12)"
+                    }
+                }
+            },
+            plugins: []
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Raleway:wght@300;400;600&family=Source+Code+Pro&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons & Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine@3.2.1/tsparticles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-fireworks@2.0.1/preset-fireworks.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="text-ivory font-body min-h-screen antialiased">
+    <!-- Neon Grid Background -->
+    <canvas id="neonGrid" class="fixed top-0 left-0 w-full h-full -z-20"></canvas>
+
+    <!-- particle canvas -->
+    <div id="tsparticles" class="fixed inset-0 -z-10"></div>
+
+    <!-- NAV -->
+    <nav class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <a href="#home" class="rose-logo" id="roseLogo" aria-label="Navya Jain home">
+                <!-- Rose SVG goes here -->
+                <svg class="rose-svg" viewBox="0 0 120 120" width="48" height="48" role="img" aria-hidden="true">
+                    <defs>
+                        <radialGradient id="gGlow" cx="50%" cy="30%">
+                            <stop offset="0%" stop-color="#ffb6c1" stop-opacity="0.95" />
+                            <stop offset="60%" stop-color="#ff00c8" stop-opacity="0.18" />
+                            <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+                        </radialGradient>
+                    </defs>
+
+                    <!-- stem -->
+                    <g class="stem" transform="translate(60,72)">
+                        <path d="M0 0 C -6 8, -8 22, -6 30" stroke="#8a5079" stroke-width="2.4" fill="none"
+                            stroke-linecap="round" />
+                    </g>
+
+                    <!-- leaves -->
+                    <g class="leaves" transform="translate(60,72)">
+                        <path class="leaf leaf-l" d="M-2 6 C -18 2, -26 -12, -12 -18" fill="#8a5079" opacity="0.95" />
+                        <path class="leaf leaf-r" d="M2 6 C 18 2, 26 -12, 12 -18" fill="#8a5079" opacity="0.95" />
+                    </g>
+
+                    <!-- petals -->
+                    <g class="petals" transform="translate(60,40)">
+                        <circle class="petal core" cx="0" cy="0" r="8" fill="#ffd9e6" />
+                        <path class="petal p1" d="M0 -8 C 12 -12, 22 -4, 14 6 C 8 12, -6 10, 0 4" fill="#ffb6c1" />
+                        <path class="petal p2" d="M0 -8 C -12 -12, -22 -4, -14 6 C -8 12, 6 10, 0 4" fill="#ff8acb" />
+                        <path class="petal p3" d="M4 -2 C 10 -8, 18 0, 10 10 C 6 14, 0 11, 0 6" fill="#ff00c8"
+                            opacity="0.95" />
+                        <path class="petal p4" d="M-4 -2 C -10 -8, -18 0, -10 10 C -6 14, 0 11, 0 6" fill="#b76df1"
+                            opacity="0.9" />
+                    </g>
+
+                    <!-- glow -->
+                    <circle class="glow" cx="60" cy="36" r="28" fill="url(#gGlow)" opacity="0.0" />
+                </svg>
+
+                <!-- Logo text -->
+                <span class="logo-text">navya@pinkverse</span>
+            </a>
+
+        </div>
+        <div class="flex gap-4 items-center">
+            <a href="#projects" class="text-sm uppercase text-mauve hover:text-dustyRose transition">Case Files</a>
+            <a href="#about" class="text-sm uppercase text-mauve hover:text-dustyRose transition">Origin</a>
+            <a href="#contact" class="text-sm uppercase text-mauve hover:text-dustyRose transition">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="max-w-6xl mx-auto px-6 py-8">
+        <div class="hero-grid">
+            <div>
+                <div class="rounded-md p-4 mb-6" style="border-left:4px solid rgba(255,0,120,0.12);">
+                    <div class="text-xs font-mono text-mauve">navya@pinkverse:~$ <span id="typed-command"
+                            class="text-ivory"></span></div>
+                </div>
+                <h1 class="text-6xl font-heading tracking-tight leading-tight text-dustyRose">Navya Jain</h1>
+                <p class="mt-4 text-xl text-ivory/90 max-w-xl">Fueled by curiosity, driven by precision — I build, break, and secure what matters most.</p>
+                <div class="mt-8 flex flex-wrap gap-4">
+                    <a href="#projects"
+                        class="inline-flex items-center gap-3 px-5 py-3 rounded-lg border border-pink-400/20 terminal-card hover:shadow-neon transition">
+                        <i class="fa-solid fa-file-code text-neonPink"></i>
+                        <span class="font-mono">Browse Mission Logs</span>
+                    </a>
+                    <a href="#tools"
+                        class="inline-flex items-center gap-3 px-5 py-3 rounded-lg border border-pink-400/20 terminal-card hover:shadow-neon transition">
+                        <i class="fa-solid fa-lock text-roseGold"></i>
+                        <span class="font-mono">Unlock Encryption Tools</span>
+                    </a>
+                    <a href="#about"
+                        class="inline-flex items-center gap-3 px-5 py-3 rounded-lg border border-pink-400/20 terminal-card hover:shadow-neon transition">
+                        <i class="fa-solid fa-user-secret text-dustyRose"></i>
+                        <span class="font-mono">Meet Navya</span>
+                    </a>
+                    <a href="#experience"
+                        class="inline-flex items-center gap-3 px-5 py-3 rounded-lg border border-pink-400/20 terminal-card hover:shadow-neon transition">
+                        <i class="fa-solid fa-laptop text-dustyRose"></i>
+                        <span class="font-mono">Check Missions</span>
+                    </a>
+                </div>
+                <div class="mt-6 flex gap-3 flex-wrap">
+                    <a href="https://drive.google.com/file/d/1bqKOBMbsPS5GQjNzsMUvW24YW0LfC7Po/view?usp=sharing"
+                        target="_blank"
+                        class="px-3 py-1 rounded-md text-xs bg-[#0f0a0c] border border-[#2a0a1a] text-dustyRose font-medium">CEH</a>
+                    <span
+                        class="px-3 py-1 rounded-md text-xs bg-[#0f0a0c] border border-[#2a0a1a] text-mauve font-medium">TryHackMe</span>
+                    <span
+                        class="px-3 py-1 rounded-md text-xs bg-[#0f0a0c] border border-[#2a0a1a] text-lavender font-medium">Machine
+                        Learning</span>
+                </div>
+                <div class="mt-8 relative">
+                    <div class="terminal-card p-6">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-[#ff385f]"></div>
+                            <div class="w-3 h-3 rounded-full bg-[#ffb86b]"></div>
+                            <div class="w-3 h-3 rounded-full bg-[#35e39c]"></div>
+                            <div class="ml-auto text-xs text-mauve font-mono">twisted_girl@darkweb:~$</div>
+                        </div>
+                        <pre class="font-mono text-sm text-ivory/90 leading-relaxed">
+<span class="text-roseGold">root@twisted_girl:~#</span> <span class="text-dustyRose">whoami</span>
+Cyber Security Enthusiast | Certified Ethical Hacker	
+
+<span class="text-roseGold">root@twisted_girl:~#</span> <span class="text-dustyRose">cat /etc/skills</span>
+Penetration Testing | Ethical Hacking | Machine Learning | Python
+
+<span class="text-roseGold">root@twisted_girl:~#</span> <span class="text-dustyRose animate-pulse" style="font-weight:bold;">█</span>
+</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="max-w-6xl mx-auto px-6 py-12">
+        <h2 class="font-heading text-3xl text-dustyRose mb-6">Mission Logs</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <article class="p-5 terminal-card hover:scale-[1.02] hover:shadow-neon transition duration-300">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-heading text-lg text-ivory">Operation GhostText — StegoShield</h3>
+                    <span class="text-xs text-mauve font-mono">Nov 2022</span>
+                </div>
+                <p class="mt-3 text-ivory/80 text-sm">GUI-based steganography tool using LSB & password encryption.</p>
+                <div class="mt-4 flex gap-2">
+                    <span class="px-2 py-1 rounded bg-[#0e0e0e] text-xs text-dustyRose font-mono">Encryption</span>
+                    <span class="px-2 py-1 rounded bg-[#0e0e0e] text-xs text-mauve font-mono">Python</span>
+                </div>
+            </article>
+            <article class="p-5 terminal-card hover:scale-[1.02] hover:shadow-neon transition duration-300">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-heading text-lg text-ivory">Operation Webtrap — PhishGuard</h3>
+                    <span class="text-xs text-mauve font-mono">Apr 2024</span>
+                </div>
+                <p class="mt-3 text-ivory/80 text-sm">ML-based phishing detector (RandomForest). Flask demo UI.</p>
+                <div class="mt-4 flex gap-2">
+                    <span class="px-2 py-1 rounded bg-[#0e0e0e] text-xs text-dustyRose font-mono">ML</span>
+                    <span class="px-2 py-1 rounded bg-[#0e0e0e] text-xs text-mauve font-mono">Flask</span>
+                </div>
+            </article>
+            <article class="p-5 terminal-card hover:scale-[1.02] hover:shadow-neon transition duration-300">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-heading text-lg text-ivory">Operation Vault-X — EncryptX</h3>
+                    <span class="text-xs text-mauve font-mono">Nov 2024</span>
+                </div>
+                <p class="mt-3 text-ivory/80 text-sm">Cross-platform AES-GCM/EAX file encryption tool.</p>
+                <div class="mt-4 flex gap-2">
+                    <span class="px-2 py-1 rounded bg-[#0e0e0e] text-xs text-dustyRose font-mono">Encryption</span>
+                    <span class="px-2 py-1 rounded bg-[#0e0e0e] text-xs text-mauve font-mono">PyQt5</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="max-w-6xl mx-auto px-6 py-12">
+        <h2
+            class="font-heading text-3xl text-dustyRose relative inline-block after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[3px] after:bg-neonPink after:opacity-40 after:blur-sm">
+            Behind the Screen
+        </h2>
+
+        <div class="grid md:grid-cols-2 gap-8 items-center mt-6">
+            <div>
+                <p class="text-ivory/90 leading-relaxed">
+                    I’m Navya Jain — a cybersecurity enthusiast with a passion for
+                    uncovering vulnerabilities and building stronger digital defenses.
+                    My expertise spans penetration testing, network security, encryption,
+                    and threat analysis, with hands-on experience across tools like
+                    <span class="text-dustyRose font-semibold">Wireshark, Burp Suite, Nmap, and OpenCV.</span>
+                </p>
+                <p class="mt-4 text-ivory/90 leading-relaxed">
+                    With a background in ethical hacking and certifications including
+                    <span class="text-dustyRose font-semibold">Certified Ethical Hacker (CEH)</span>,
+                    I approach every project with an attacker’s mindset and a defender’s
+                    precision — ensuring security solutions that are both robust and adaptable.
+                </p>
+                <p class="mt-4 text-ivory/90 leading-relaxed">
+                    Beyond the code and firewalls, I’m driven by curiosity, continuous learning,
+                    and the thrill of solving problems others might overlook. For me,
+                    cybersecurity isn’t just a skill — it’s a responsibility.
+                </p>
+                <div class="mt-6 flex gap-3">
+                    <a href="assets/NAVYA_resume.pdf" download
+                        class="px-4 py-2 rounded bg-dustyRose text-black font-medium">Download Resume</a>
+                    <a href="https://github.com/nxvyx" target="_blank"
+                        class="px-4 py-2 rounded border border-pink-400/10 font-medium">GitHub</a>
+                </div>
+            </div>
+            <div>
+                <div class="terminal-card p-5">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-16 h-16 rounded-md bg-gradient-to-tr from-dustyRose to-roseGold flex items-center justify-center text-black font-bold">
+                            NJ</div>
+                        <div>
+                            <h3 class="font-heading text-lg text-ivory">Navya Jain</h3>
+                            <p class="text-ivory/80 text-sm mt-1">Cybersecurity Enthusiast · Ethical Hacker</p>
+                            <div class="mt-3 text-sm text-ivory/70 font-mono">
+                                <div>📍 Delhi, India</div>
+                                <div>✉️ navya08jain@gmail.com</div>
+                                <div>📞 +91-8826143872</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Experience section-->
+    <section id="experience" class="max-w-6xl mx-auto px-6 py-16">
+  <h2 class="font-heading text-3xl text-dustyRose mb-12">Mision Dossier</h2>
+  <div class="relative border-l-2 border-pink-500/30 ml-6">
+
+    <!-- Deloitte -->
+    <div class="mb-12 pl-6 opacity-0 translate-y-6 transition-all duration-700 reveal">
+      <div class="absolute -left-[11px] w-5 h-5 bg-neonPink rounded-full shadow-[0_0_10px_#ff00c8]"></div>
+      <h3 class="text-xl font-semibold text-ivory">Deloitte Australia — Cyber Job Simulation</h3>
+      <p class="text-sm text-mauve">Forage · June 2025</p>
+      <ul class="list-disc list-inside text-ivory/80 mt-2">
+        <li>Completed a simulation involving analysis of web activity logs during a cyber breach.</li>
+        <li>Identified suspicious user activity and recommended response steps.</li>
+      </ul>
+    </div>
+
+    <!-- Mastercard -->
+    <div class="mb-12 pl-6 opacity-0 translate-y-6 transition-all duration-700 reveal">
+      <div class="absolute -left-[11px] w-5 h-5 bg-neonPink rounded-full shadow-[0_0_10px_#ff00c8]"></div>
+      <h3 class="text-xl font-semibold text-ivory">Mastercard — Cybersecurity Virtual Program</h3>
+      <p class="text-sm text-mauve">Forage · June 2025</p>
+      <ul class="list-disc list-inside text-ivory/80 mt-2">
+        <li>Simulated role as analyst on Security Awareness Team.</li>
+        <li>Identified and reported phishing threats, improved training procedures.</li>
+      </ul>
+    </div>
+
+    <!-- AI Intern -->
+    <div class="pl-6 opacity-0 translate-y-6 transition-all duration-700 reveal">
+      <div class="absolute -left-[11px] w-5 h-5 bg-neonPink rounded-full shadow-[0_0_10px_#ff00c8]"></div>
+      <h3 class="text-xl font-semibold text-ivory">AI Intern — Zigguratss Artwork LLP</h3>
+      <p class="text-sm text-mauve">Remote · June 2024 – Nov 2024</p>
+      <ul class="list-disc list-inside text-ivory/80 mt-2">
+        <li>Enhanced image-based search functionality for Visual Search team.</li>
+        <li>Improved image recognition models and data scraping pipelines.</li>
+        <li>Integrated visual AI with phishing detection for threat identification.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+
+    <!-- CONTACT -->
+    <footer id="contact" class="max-w-6xl mx-auto px-6 py-12">
+        <div class="terminal-card p-6">
+            <div class="flex items-center justify-between">
+                <h3 class="font-heading text-xl text-dustyRose">Contact</h3>
+                <div class="flex items-center gap-4">
+                    <a href="https://www.linkedin.com/in/navya-jaiin" target="_blank"
+                        class="text-mauve hover:text-dustyRose"><i class="fa-brands fa-linkedin fa-lg"></i></a>
+                    <a href="https://github.com/nxvyx" target="_blank" class="text-mauve hover:text-dustyRose"><i
+                            class="fa-brands fa-github fa-lg"></i></a>
+                    <a href="https://tryhackme.com/p/nxvyxx" target="_blank" class="text-mauve hover:text-dustyRose"><i
+                            class="fa-solid fa-shield"></i></a>
+                </div>
+            </div>
+            <div class="mt-4 text-ivory/80">
+                If you want to collaborate or hire me — send a note to
+                <a class="underline text-dustyRose" href="mailto:navya08jain@gmail.com">navya08jain@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="max-w-6xl mx-auto px-6 py-6 text-xs text-ivory/60 text-center">
+        Designed & coded by Navya — inspired by Morana, Zade & Christian
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

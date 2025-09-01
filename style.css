@@ -1,0 +1,288 @@
+:root {
+    color-scheme: dark;
+}
+
+body {
+    background: linear-gradient(180deg, #0e0e0e 0%, #12060a 100%);
+    -webkit-font-smoothing: antialiased;
+}
+
+.terminal-card {
+    border: 2px solid rgba(255, 0, 120, 0.18);
+    border-radius: 12px;
+    background: rgba(10, 6, 10, 0.7);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+.drip-rose {
+    position: absolute;
+    right: 2rem;
+    top: 1.2rem;
+    width: 56px;
+    opacity: 0.95;
+    filter: drop-shadow(0 4px 12px rgba(200, 0, 120, 0.2));
+}
+
+/* Responsive tweaks */
+@media (max-width: 880px) {
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+    }
+    .drip-rose {
+        display: none;
+    }
+}
+
+/* Rose bloom logo styles */
+.rose-logo {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    text-decoration: none;
+    color: #ffd9e6;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 700;
+    transform-origin: center;
+    will-change: transform;
+    padding: 6px 8px;
+    border-radius: 8px;
+}
+
+.rose-svg {
+    display: block;
+    filter: drop-shadow(0 6px 18px rgba(255, 0, 160, 0.06));
+}
+
+.logo-text {
+    color: #ffd9e6;
+    font-size: 0.95rem;
+    letter-spacing: 0.6px;
+    user-select: none;
+}
+
+.petals .petal {
+    transform-origin: 0 0;
+    transition: transform 420ms cubic-bezier(.2, .9, .2, 1), opacity 420ms;
+    transform: scale(0.85);
+    opacity: 0.95;
+}
+
+.stem path {
+    transition: stroke 380ms;
+}
+
+.leaves .leaf {
+    transform-origin: center;
+    transition: transform 420ms, opacity 420ms;
+    transform: translateY(6px) scale(0.92);
+    opacity: 0.9;
+}
+
+.glow {
+    transition: opacity 420ms ease, r 420ms;
+    opacity: 0;
+}
+
+.rose-logo:hover .petals .petal,
+.rose-logo.bloom .petals .petal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.rose-logo:hover .petals .p1 { transition-delay: 0ms; transform: translateY(-2px) scale(1.02); }
+.rose-logo:hover .petals .p2 { transition-delay: 30ms; transform: translateY(-2px) scale(1.03); }
+.rose-logo:hover .petals .p3 { transition-delay: 60ms; transform: translateY(-4px) scale(1.04); }
+.rose-logo:hover .petals .p4 { transition-delay: 90ms; transform: translateY(-4px) scale(1.04); }
+.rose-logo:hover .petals .core { transition-delay: 110ms; transform: scale(1.05); }
+
+.rose-logo:hover .leaves .leaf,
+.rose-logo.bloom .leaves .leaf {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+.rose-logo:hover .glow,
+.rose-logo.bloom .glow {
+    opacity: 0.65;
+}
+
+.rose-logo:hover,
+.rose-logo.bloom {
+    transform: translateY(-2px);
+    text-shadow: 0 6px 30px rgba(255, 0, 160, 0.07);
+}
+
+.rose-logo:focus {
+    outline: 2px dashed rgba(255, 182, 193, 0.12);
+    outline-offset: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .petals .petal,
+    .leaves .leaf,
+    .glow {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .rose-svg {
+        width: 40px;
+        height: 40px;
+    }
+    .logo-text {
+        display: none;
+    }
+}
+
+/* Mission Log Timeline Animation */
+#experience .group {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+#experience .group:nth-child(1) { animation-delay: 0.2s; }
+#experience .group:nth-child(2) { animation-delay: 0.5s; }
+#experience .group:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Experience: scroll-unfold tabs ---------- */
+
+/* remove any leftover timeline line */
+#experience { position: relative; }
+#experience::before { display: none !important; } /* override older timeline rule if present */
+
+/* item spacing */
+.exp-list { margin-top: 1rem; }
+
+/* header button */
+.exp-header {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* chevron */
+.chev {
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform .35s cubic-bezier(.2,.9,.2,1), color .25s;
+  color: #ffb6d9;
+  font-size: 1.2rem;
+}
+
+/* body collapsed state */
+.exp-body {
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: max-height 0.55s cubic-bezier(.2,.9,.2,1), opacity 0.45s ease, transform 0.45s ease;
+}
+
+/* expanded state (class added by JS) */
+.exp-item.expanded .exp-body {
+  max-height: 900px; /* large enough to fit content; JS will adjust inline for smoothness */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* rotate chevron when expanded */
+.exp-item.expanded .chev {
+  transform: rotate(90deg);
+  color: #ff00c8;
+  text-shadow: 0 6px 18px rgba(255,0,200,0.12);
+}
+
+/* terminal-card tweaks to match look */
+.exp-item.terminal-card {
+  border: 1px solid rgba(255,0,200,0.14);
+  background: rgba(12,8,10,0.55);
+  padding: 1rem;
+}
+
+/* tags */
+.tag {
+  background: #0f0a0c;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: .75rem;
+  color: #ffd9e6;
+  border: 1px solid rgba(255,0,200,0.06);
+}
+
+/* accessible reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .exp-body { transition: none !important; }
+  .chev { transition: none !important; }
+}
+
+.mission-card {
+    border: 1px solid rgba(255, 0, 200, 0.2);
+    background: rgba(10, 5, 15, 0.6);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 20px rgba(255, 0, 200, 0.08);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.mission-card.active {
+    opacity: 1;
+    transform: translateY(0);
+    box-shadow: 0 0 30px rgba(255, 0, 200, 0.4), 0 0 60px rgba(255, 0, 200, 0.2);
+}
+
+.mission-title {
+    color: #ff00c8;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.mission-meta {
+    font-size: 0.9rem;
+    color: #d4a5b5;
+    margin-bottom: 1rem;
+}
+
+.mission-card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.mission-card ul li {
+    padding-left: 1.2rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+    color: #fffaf3;
+    font-size: 0.95rem;
+}
+
+.mission-card ul li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: #ff00c8;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
