@@ -28,13 +28,16 @@ This project showcases my skills, projects, and experience in **Cybersecurity, A
 2. **Mission Logs** → Showcasing projects (encryption tools, phishing detection, etc.)  
 3. **About Me** → Skills, tools, certifications, and personal intro  
 4. **Work Experience** → Deloitte, Mastercard, Zigguratss LLP internship  
-5. **Contact** → navya08jain@gmail.com , https://tryhackme.com/p/nxvyxx , www.linkedin.com/in/navya-jaiin 
 
+## 📬 Contact
+
+If you’d like to connect, collaborate, or discuss opportunities:
+📧 **[navya08jain@gmail.com](mailto:navya08jain@gmail.com)**
+🔗 [LinkedIn](https://www.linkedin.com/in/navya-jaiin)
+💻 [GitHub](https://github.com/nxvyx)
 
 ---
 
-## ⚡ Setup
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/nxvyx/portfolio.git
-   cd portfolio
+✨ *Designed & coded with 💻 + 🌹 by Navya*
+
+```
